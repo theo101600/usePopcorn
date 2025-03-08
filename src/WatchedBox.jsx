@@ -1,14 +1,7 @@
-import WatchedMovieList from "./WatchedMovieList";
-import WatchedSummary from "./WatchedSummay";
+import { useState } from "react";
 
-export default function WatchedBox({
-  isOpen2,
-  setIsOpen2,
-  watched,
-  avgImdbRating,
-  avgRuntime,
-  avgUserRating,
-}) {
+export default function WatchedBox({ children }) {
+  const [isOpen2, setIsOpen2] = useState(true);
   return (
     <div className="box">
       <button
@@ -17,17 +10,7 @@ export default function WatchedBox({
       >
         {isOpen2 ? "–" : "+"}
       </button>
-      {isOpen2 && (
-        <>
-          <WatchedSummary
-            watched={watched}
-            avgImdbRating={avgImdbRating}
-            avgRuntime={avgRuntime}
-            avgUserRating={avgUserRating}
-          />
-          <WatchedMovieList watched={watched} />
-        </>
-      )}
+      {isOpen2 && children}
     </div>
   );
 }
