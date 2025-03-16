@@ -3,10 +3,18 @@ import StarRating from "./StarRating";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
 
-export default function MovieDetails({ selectedId, onCloseMovie, OMDb_KEY }) {
+export default function MovieDetails({
+  selectedId,
+  onCloseMovie,
+  OMDb_KEY,
+  onAddWatched,
+  isWatched,
+  watched,
+}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [userRating, setuserRating] = useState("");
 
   const {
     Title: title,
@@ -19,6 +27,37 @@ export default function MovieDetails({ selectedId, onCloseMovie, OMDb_KEY }) {
     Director: director,
     Genre: genre,
   } = movie;
+
+  function handleAdd() {
+    const newWatchedMovie = {
+      imdbID: selectedId,
+      title,
+      poster,
+      released,
+      userRating: userRating,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+    };
+    onAddWatched(newWatchedMovie);
+    onCloseMovie();
+  }
+
+  useEffect(
+    function () {
+      function escapeClose(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+        }
+      }
+
+      document.addEventListener("keydown", escapeClose);
+
+      return function () {
+        document.removeEventListener("keydown", escapeClose);
+      };
+    },
+    [onCloseMovie]
+  );
 
   useEffect(
     function () {
@@ -46,6 +85,18 @@ export default function MovieDetails({ selectedId, onCloseMovie, OMDb_KEY }) {
     },
     [selectedId, OMDb_KEY]
   );
+
+  useEffect(
+    function () {
+      document.title = `Movie | ${title}`;
+
+      return function () {
+        document.title = "usePopcorn";
+      };
+    },
+    [title]
+  );
+
   return (
     <div className="details">
       {isLoading && <Loader />}
@@ -70,7 +121,26 @@ export default function MovieDetails({ selectedId, onCloseMovie, OMDb_KEY }) {
           </header>
           <section>
             <div className="rating">
-              <StarRating maxRating={10} size={25} />
+              {!isWatched.includes(selectedId) ? (
+                <>
+                  {" "}
+                  <StarRating
+                    maxRating={10}
+                    size={25}
+                    onSetRating={setuserRating}
+                  />
+                  {userRating && (
+                    <button className="btn-add" onClick={handleAdd}>
+                      + Add to Watched
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>
+                  You rated this movie{" "}
+                  {watched.find((el) => el.imdbID == selectedId).userRating}⭐
+                </p>
+              )}
             </div>
 
             <p>
