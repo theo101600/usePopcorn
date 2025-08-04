@@ -1,12 +1,12 @@
 :root {
-  --color-primary: #e36414;
-  --color-primary-light: #fb8b24;
+  --color-primary: #b388eb;
+  --color-primary-light: #f7aef8;
   --color-text: #dee2e6;
   --color-text-light: #37323e;
   --color-text-dark: #adb5bd;
-  --color-background-100: #343a40;
-  --color-background-500: #2b3035;
-  --color-background-900: #212529;
+  --color-background-100: #3c096c;
+  --color-background-500: #240046;
+  --color-background-900: #10002b;
   --color-red: #fa5252;
   --color-red-dark: #e03131;
 }
@@ -57,6 +57,12 @@ body {
   border-radius: 0.9rem;
   overflow: scroll;
   position: relative;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.box::-webkit-scrollbar {
+  display: none;
 }
 
 .loader {
@@ -140,6 +146,12 @@ body {
   list-style: none;
   padding: 0.8rem 0;
   overflow: scroll;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.list::-webkit-scrollbar {
+  display: none;
 }
 
 .list-watched {
