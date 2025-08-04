@@ -17,12 +17,12 @@ A React web app for fetching and managing movie search results from the OMDb API
 
 ## Tech Stack
 
-| **Category**           | **Technology / Package**             | **Purpose / Functionality**          |
-| ---------------------- | ------------------------------------ | ------------------------------------ |
-| **Frontend Framework** | `React`                              | UI components and logic              |
-| **Custom Hooks**       | `usePopcorn`, `useLocalStorageState` | Manage search and watched list state |
-| **API**                | `OMDb API`                           | Fetch movie details                  |
-| **State Management**   | `useState`, `useEffect`              | Local state and side-effect handling |
+| **Category**           | **Technology / Package** | **Purpose / Functionality**          |
+| ---------------------- | ------------------------ | ------------------------------------ |
+| **Frontend Framework** | `React`                  | UI components and logic              |
+| **Custom Hooks**       | `useLocalStorage`        | Manage search and watched list state |
+| **API**                | `OMDb API`               | Fetch movie details                  |
+| **State Management**   | `useState`               | Local state and side-effect handling |
 
 ## Gallery
 
